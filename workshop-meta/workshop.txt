@@ -1,0 +1,11 @@
+version=1
+id=
+title=Heap Warning
+description=On connecting to a server, warns the player with a dismissible popup if their game's JVM max heap (-Xmx) is below a server-configured minimum.
+description=The threshold is a sandbox option, "Minimum Max Heap (MB)" (default 4096 / 4 GB), so the server owner sets it and it syncs to every client. Set it to 0 to disable the check.
+description=
+description=It is only a notice - the player clicks OK and keeps playing; nothing is ever blocked.
+description=
+description=Build 42 only. Pure Lua (no Java patches); client-side check that reads this game's own heap. Dedicated-server friendly - the threshold syncs from the server like any sandbox var.
+tags=Build 42;Multiplayer
+visibility=public

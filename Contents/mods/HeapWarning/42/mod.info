@@ -1,0 +1,8 @@
+name=Heap Warning
+id=HeapWarning
+description=On connecting to a server, warns the player with a dismissible popup if their game's JVM max heap (-Xmx) is below a server-configured minimum. Just a notice - click OK and play on.
+poster=poster.png
+icon=icon.png
+author=PeterMcBeater
+modversion=0.1.0
+versionMin=42.0.0

@@ -1,0 +1,5 @@
+.DS_Store
+*.zip
+
+# Generated Workshop bundle (assembled by build.sh from Contents/ + workshop-meta/)
+workshop-upload/

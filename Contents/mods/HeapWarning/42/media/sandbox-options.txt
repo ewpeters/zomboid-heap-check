@@ -1,0 +1,11 @@
+VERSION = 1,
+
+option HeapWarning.MinHeapMB
+{
+    type = integer,
+    min = 0,
+    max = 131072,
+    default = 4096,
+    page = HeapWarning,
+    translation = HeapWarning_MinHeapMB,
+}

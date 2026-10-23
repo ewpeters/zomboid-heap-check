@@ -1,0 +1,6 @@
+{
+    "Sandbox_HeapWarning": "Heap Warning",
+
+    "Sandbox_HeapWarning_MinHeapMB": "Minimum Max Heap (MB)",
+    "Sandbox_HeapWarning_MinHeapMB_tooltip": "Players whose game JVM max heap (-Xmx) is below this many MB get a dismissible popup on connecting, suggesting they raise it. Default 4096 (4 GB). Set to 0 to disable the check entirely. This is only a notice -- it never blocks anyone from playing."
+}
