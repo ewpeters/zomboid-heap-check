@@ -3,7 +3,7 @@
 -- syncs to every client automatically (no custom network traffic needed).
 
 HeapWarning = HeapWarning or {}
-HeapWarning.VERSION = "0.1.0"
+HeapWarning.VERSION = "0.1.7"
 
 local DEFAULT_MIN_HEAP_MB = 4096
 
@@ -19,20 +19,23 @@ function HeapWarning.getMinHeapMB()
 end
 
 -- Read this JVM's configured max heap (-Xmx) in MB.
--- There is no vanilla Lua API for this, so we reflect into java.lang.Runtime.
--- Kahlua exposes Java statics via the global class path; maxMemory() returns
--- bytes. Everything is pcall-guarded: if the reflection isn't available we
--- return nil and the caller skips the warning rather than erroring.
+-- B42 does not expose java.lang.Runtime or luajava to Lua (both are nil), so
+-- reflection throws "attempted index of non-table: null". Instead we use the
+-- engine-exposed getPerformanceLocal() global -- the same source vanilla's
+-- ISStatisticsUI uses for its "Max (MB)" row. It returns a table whose
+-- ["memory-max"] field is the JVM max heap already in MB.
+-- Everything is pcall-guarded: if the API isn't available we return nil and the
+-- caller skips the warning rather than erroring.
 -- Returns: number (MB) on success, or nil if it couldn't be read.
 function HeapWarning.getMaxHeapMB()
-    local ok, bytes = pcall(function()
-        return Runtime.getRuntime():maxMemory()
+    local ok, mb = pcall(function()
+        local perf = getPerformanceLocal()
+        return perf and perf["memory-max"]
     end)
-    if not ok or bytes == nil then
+    if not ok or mb == nil then
         return nil
     end
-    -- maxMemory() returns a Java long; divide to MB.
-    local mb = tonumber(bytes) / (1024 * 1024)
+    mb = tonumber(mb)
     if mb == nil or mb <= 0 then
         return nil
     end

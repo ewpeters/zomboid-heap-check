@@ -4,5 +4,5 @@ description=On connecting to a server, warns the player with a dismissible popup
 poster=poster.png
 icon=icon.png
 author=PeterMcBeater
-modversion=0.1.0
+modversion=0.1.7
 versionMin=42.0.0
